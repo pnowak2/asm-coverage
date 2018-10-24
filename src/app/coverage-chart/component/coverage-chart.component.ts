@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CoverageItem, TimeWindow } from './model/coverage.model';
+import { CoverageItem, TimeWindow } from '../model/coverage.model';
+import { CoverageService } from '../service/coverage.service';
 
 @Component({
   selector: 'asm-coverage-chart',
@@ -9,4 +10,8 @@ import { CoverageItem, TimeWindow } from './model/coverage.model';
 export class CoverageChartComponent {
   @Input() data: Array<CoverageItem> = [];
   @Input() timeWindow: TimeWindow;
+
+  constructor(private coverageService: CoverageService) {
+
+  }
 }

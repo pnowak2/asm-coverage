@@ -1,18 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
-import { CoverageChartComponent } from './coverage-chart/coverage-chart.component';
+import { CoverageChartModule } from './coverage-chart/coverage-chart.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoverageChartComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CoverageChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
