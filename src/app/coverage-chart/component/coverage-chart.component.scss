@@ -1,61 +1,59 @@
 .asm-coverage-chart { 
   position: relative;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.2rem;
  
-  &__x-axis {
-    display: flex;
-    width: auto;
-    flex: 1 1;
-    position: absolute;
-    bottom: -0.2rem;
-    left: 13rem;
-    width: calc(100% - 13rem);
-    height: 0;
-    border-top: 1px solid grey;
-    
-    &-label {
-      position: absolute;
-      left: 50%;
-      font-size: 11px;
-      margin-top: 0.5rem;
-      transform: translateX(-50%);
-    }
-  }
-  
-  &__y-axis {
-    position: absolute;
-    bottom: 0;
-    width: calc(100% - 13rem);
-    left: 13rem;
-    height: 110%;
-    
-    &-line {
-      position: absolute;
-      bottom: -0.5rem;
-      border-left: 1px dashed grey;
-      width: 1px;
-      height: 100%;
-      opacity: 0.4;
-    }
-  }
-  
   &__item {
     display: flex;
     align-content: center;
     align-items: center;
-
-    &-progress {
-      cursor: pointer;
-      flex: 1 1 auto;
+    
+    &:not(:last-child) {
+      margin-bottom: 0.2rem;
     }
 
-    &-label {
-      font-size: 13px;
+    &-text {
+      font-size: 0.7rem;
       margin-right: 1rem;
       width: 12rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: right;
+    }
+
+    &-progress {
+      flex: 1 1 auto;
+    }
+  }
+
+  &__x-axis {
+    position: absolute;
+    left: 13rem;
+    width: calc(100% - 13rem);
+    height: 100%;
+    border-bottom: 1px solid grey;
+    
+    &-item {
+      position: absolute;
+      bottom: 0;
+      height: 100%;
+
+      &-text {
+        position: absolute;
+        font-size: 0.7rem;
+        bottom: -1.5rem;
+        transform: translateX(-50%);
+      }
+  
+      &-line {
+        position: absolute;
+        bottom: 0;
+        border-left: 1px dashed grey;
+        opacity: 0.3;
+        height: 100%;
+        left: 50%;
+      }
     }
   }
 }
