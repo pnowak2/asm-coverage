@@ -11,6 +11,11 @@ export interface CoveragePeriod {
 }
 
 export interface TimeWindow {
-  from: Date;
-  to: Date;
+  from?: Date;
+  to?: Date;
+}
+
+export interface AxisLabel {
+  position: number;
+  text: string;
 }

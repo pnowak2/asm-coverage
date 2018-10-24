@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CoverageItem, TimeWindow } from '../model/coverage.model';
+import { CoverageItem, TimeWindow, AxisLabel } from '../model/coverage.model';
 import { CoverageService } from '../service/coverage.service';
 
 @Component({
@@ -11,7 +11,9 @@ export class CoverageChartComponent {
   @Input() data: Array<CoverageItem> = [];
   @Input() timeWindow: TimeWindow;
 
-  constructor(private coverageService: CoverageService) {
+  axisLabels: Array<AxisLabel> = [];
 
+  constructor(private coverageService: CoverageService) {
+    this.axisLabels = coverageService.createAxisLabels(this.timeWindow);
   }
 }
