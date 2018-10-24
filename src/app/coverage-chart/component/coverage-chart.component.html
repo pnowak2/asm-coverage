@@ -1,58 +1,51 @@
 <div class="asm-coverage-chart">
-  <div class="asm-coverage-chart__y-axis">
+  <div class="asm-coverage-chart__x-axis">
     <div *ngFor="let label of axisLabels" 
-         [style.left.%]="label.position"
-         class="asm-coverage-chart__y-axis-line">
+        [style.left.%]="label.position"
+        class="asm-coverage-chart__x-axis-label">
+        {{ label.text }}
     </div>
   </div>
 
-<div class="asm-coverage-chart__x-axis">
-  <div *ngFor="let label of axisLabels" 
-       [style.left.%]="label.position"
-       class="asm-coverage-chart__x-axis-label">
-       {{ label.text }}
+  <div class="asm-coverage-chart__item">
+    <div class="asm-coverage-chart__item-label">OPSOMMER Gunnar <span class="text-muted">(AF-00)</span></div>
+    <div class="progress asm-coverage-chart__item-progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width: 15%">IN DELEGATION</div>
+      <div class="progress-bar bg-info" style="width: 25%"></div>
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width: 25%">IN DELEGATION</div>
+    </div>
   </div>
-</div>
 
-<div class="asm-coverage-chart__item">
-  <div class="asm-coverage-chart__item-label">OPSOMMER Gunnar <span class="text-muted">(AF-00)</span></div>
-  <div class="progress asm-coverage-chart__item-progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width: 15%">IN DELEGATION</div>
-    <div class="progress-bar bg-info" style="width: 25%"></div>
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width: 25%">IN DELEGATION</div>
+  <div class="asm-coverage-chart__item">
+    <div class="asm-coverage-chart__item-label">FLEURENT Reinhilde <span class="text-muted">(CJ-00)</span></div>
+    <div class="progress asm-coverage-chart__item-progress">
+      <div class="progress-bar bg-danger" style="width: 45%"></div>
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" style="width: 25%">IN DELEGATION</div>
+    </div>
   </div>
-</div>
 
-<div class="asm-coverage-chart__item">
-  <div class="asm-coverage-chart__item-label">FLEURENT Reinhilde <span class="text-muted">(CJ-00)</span></div>
-  <div class="progress asm-coverage-chart__item-progress">
-    <div class="progress-bar bg-danger" style="width: 45%"></div>
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" style="width: 25%">IN DELEGATION</div>
+  <div class="asm-coverage-chart__item">
+    <div class="asm-coverage-chart__item-label">OPSOMMER Wout <span class="text-muted">(EF-01)</span></div>
+    <div class="progress asm-coverage-chart__item-progress">
+      <div class="progress-bar bg-success" style="width: 85%"></div>
+    </div>
   </div>
-</div>
 
-<div class="asm-coverage-chart__item">
-  <div class="asm-coverage-chart__item-label">OPSOMMER Wout <span class="text-muted">(EF-01)</span></div>
-  <div class="progress asm-coverage-chart__item-progress">
-    <div class="progress-bar bg-success" style="width: 85%"></div>
+  <div class="asm-coverage-chart__item">
+    <div class="asm-coverage-chart__item-label">OPSOMMER Tom <span class="text-muted">(EF-02)</span></div>
+    <div class="progress asm-coverage-chart__item-progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 25%">IN DELEGATION</div>
+      
+    </div>
   </div>
-</div>
 
-<div class="asm-coverage-chart__item">
-  <div class="asm-coverage-chart__item-label">OPSOMMER Tom <span class="text-muted">(EF-02)</span></div>
-  <div class="progress asm-coverage-chart__item-progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 25%">IN DELEGATION</div>
-    
+  <div class="asm-coverage-chart__item">
+    <div class="asm-coverage-chart__item-label">OPSOMMER Kaat <span class="text-muted">(EF-03)</span></div>
+    <div class="progress asm-coverage-chart__item-progress">
+      <div class="progress-bar bg-transparent" style="width: 17%"></div>
+      <div class="progress-bar bg-secondary" style="width: 29%"></div>
+      <div class="progress-bar bg-transparent" style="width: 20%"></div>
+      <div class="progress-bar bg-secondary" style="width: 40%"></div>
+    </div>
   </div>
-</div>
-
-<div class="asm-coverage-chart__item">
-  <div class="asm-coverage-chart__item-label">OPSOMMER Kaat <span class="text-muted">(EF-03)</span></div>
-  <div class="progress asm-coverage-chart__item-progress">
-    <div class="progress-bar bg-transparent" style="width: 17%"></div>
-    <div class="progress-bar bg-secondary" style="width: 29%"></div>
-    <div class="progress-bar bg-transparent" style="width: 20%"></div>
-    <div class="progress-bar bg-secondary" style="width: 40%"></div>
-  </div>
-</div>
 </div>
