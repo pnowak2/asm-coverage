@@ -1,0 +1,62 @@
+.asm-coverage-chart { 
+  position: relative;
+  
+ 
+  &__x-axis {
+    display: flex;
+    width: auto;
+    flex: 1 1 33%;
+    position: absolute;
+    bottom: -0.2rem;
+    left: 13rem;
+    width: calc(100% - 13rem);
+    height: 0;
+    border-top: 1px solid grey;
+    
+    &-label {
+      position: absolute;
+      left: 50%;
+      font-size: 11px;
+      margin-top: 0.5rem;
+      transform: translateX(-50%);
+    }
+  }
+  
+  &__y-axis {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 13rem);
+    left: 13rem;
+    height: 110%;
+    
+    &-line {
+      position: absolute;
+      bottom: -0.5rem;
+      border-left: 1px dashed grey;
+      width: 1px;
+      height: 100%;
+      opacity: 0.4;
+    }
+  }
+  
+  &__item {
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    &-progress {
+      cursor: pointer;
+      flex: 1 1 auto;
+    }
+
+    &-label {
+      font-size: 13px;
+      margin-right: 1rem;
+      width: 12rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: right;
+    }
+  }
+}
