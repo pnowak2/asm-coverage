@@ -5,6 +5,10 @@
         class="asm-coverage-chart__x-axis-label">
         {{ label.text }}
     </div>
+    <div *ngFor="let label of axisLabels" 
+        [style.left.%]="label.position"
+        class="asm-coverage-chart__x-axis-divider">
+    </div>
   </div>
 
   <div class="asm-coverage-chart__item">
