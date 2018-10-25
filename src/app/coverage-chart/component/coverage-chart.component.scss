@@ -24,6 +24,7 @@
 
     &-progress {
       flex: 1 1 auto;
+      cursor: pointer;
     }
   }
 
@@ -33,6 +34,7 @@
     width: calc(100% - 13rem);
     height: 100%;
     border-bottom: 1px solid grey;
+    pointer-events: none;
     
     &-item {
       position: absolute;
@@ -53,6 +55,12 @@
         opacity: 0.3;
         height: 100%;
         left: 50%;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      &-item:nth-child(even) {
+        display: none;
       }
     }
   }
