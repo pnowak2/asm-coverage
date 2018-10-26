@@ -22,6 +22,10 @@
       text-align: right;
     }
 
+    &-progress-text {
+      line-height: 0.75rem;
+    }
+
     &-progress {
       flex: 1 1 auto;
       cursor: pointer;
