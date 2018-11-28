@@ -23,7 +23,7 @@ export class AppComponent {
         periods: [{
           label: 'IN DELEGATION',
           from: moment('17/03/2017', 'DD-MM-YYYY').toDate(),
-          to: moment('29/06/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('30/09/2019', 'DD-MM-YYYY').toDate(),
         },
         {
           from: moment('24/08/2017', 'DD-MM-YYYY').toDate(),

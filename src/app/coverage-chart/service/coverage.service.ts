@@ -15,7 +15,14 @@ export class CoverageService {
       .subtract(19, 'months')
       .toDate();
 
-    return { from, to };
+    return this.normalizeTimeWindow({ from, to });
+  }
+
+  normalizeTimeWindow(timeWindow: TimeWindow): TimeWindow {
+    return {
+      from: moment(timeWindow.from).startOf('month').toDate(),
+      to: moment(timeWindow.to).endOf('month').toDate()
+    };
   }
 
   arrayWithRange(range: number) {
@@ -57,6 +64,16 @@ export class CoverageService {
       return {
         label: ci.label,
         periods: ci.periods.map(pd => {
+
+          const leftClamp = moment
+            .max(moment(pd.from), moment(timeWindow.from));
+          const rightClamp = moment
+            .min(moment(pd.to), moment(timeWindow.to));
+
+          // console.log('normal', pd.from);
+          console.log('lclamped', leftClamp);
+          console.log('rclamped', rightClamp);
+
           return {
             styleClass: pd.styleClass,
             label: pd.label,
