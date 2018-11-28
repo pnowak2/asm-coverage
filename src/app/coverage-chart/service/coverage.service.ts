@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { TimeWindow, AxisLabelVM } from '../model/coverage.model';
+import { TimeWindow, AxisLabelVM, CoverageItemVM } from '../model/coverage.model';
 
 @Injectable()
 export class CoverageService {
@@ -9,7 +9,7 @@ export class CoverageService {
     return moment(to).diff(from, 'months', false) + 1;
   }
 
-  sanitizeTimeWindow(timeWindow: TimeWindow): TimeWindow {
+  createTimeWindow(timeWindow: TimeWindow): TimeWindow {
     const to = timeWindow.to || moment().toDate();
     const from = timeWindow.from || moment(to)
       .subtract(19, 'months')
@@ -25,7 +25,7 @@ export class CoverageService {
   }
 
   createAxisLabels(timeWindow: TimeWindow): Array<AxisLabelVM> {
-    const tw = this.sanitizeTimeWindow(timeWindow);
+    const tw = this.createTimeWindow(timeWindow);
     const monthsCount = this.getMonthsDifference(tw.from, tw.to);
     const monthsToIterate = this.arrayWithRange(monthsCount);
 
@@ -36,5 +36,30 @@ export class CoverageService {
 
       return { percentage, text };
     });
+  }
+
+  createCoverageItems(timeWindow: TimeWindow): Array<CoverageItemVM> {
+    const tw = this.createTimeWindow(timeWindow);
+    const monthsCount = this.getMonthsDifference(tw.from, tw.to);
+    const monthsToIterate = this.arrayWithRange(monthsCount);
+
+    return [
+      {
+        label: 'OPSOMMER Gunnar (AF-00)',
+        periods: [{
+          label: 'IN DELEGATION',
+          from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
+          percentage: 20
+        },
+        {
+          from: moment('1/08/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('1/011/2017', 'DD-MM-YYYY').toDate(),
+          isEmpty: true,
+          styleClass: 'progress-bar-striped',
+          percentage: 30
+        }]
+      },
+    ];
   }
 }

@@ -1,7 +1,7 @@
 <div class="asm-coverage-chart">
 
   <div class="asm-coverage-chart__x-axis">
-    <div *ngFor="let label of axisLabels" 
+    <div *ngFor="let label of _axisLabels" 
         [style.left.%]="label.percentage"
         class="asm-coverage-chart__x-axis-item">
         <div class="asm-coverage-chart__x-axis-item-text">{{ label.text }}</div>
@@ -9,14 +9,14 @@
     </div>
   </div>
 
-  <div *ngFor="let item of coverageItems" class="asm-coverage-chart__item">
+  <div *ngFor="let item of _coverageItems" class="asm-coverage-chart__item">
     <div class="asm-coverage-chart__item-text">{{ item.label }}</div>
     <div class="progress asm-coverage-chart__item-progress">
       <div *ngFor="let period of item.periods" 
-           [style.width.%]="30"
-           [class.bg-transparent]="period.isEmpty"
+           [style.width.%]="period.percentage"
            (click)="onBarClick($event, period)" 
-           class="progress-bar progress-bar-striped progress-bar-animated bg-secondary">
+           class="progress-bar bg-secondary {{ period.styleClass }}"
+           [class.bg-transparent]="period.isEmpty">
         <span *ngIf="period.label" 
               class="asm-coverage-chart__item-progress-text text-truncate">
           {{ period.label }}
