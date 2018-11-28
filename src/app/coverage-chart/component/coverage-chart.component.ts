@@ -21,13 +21,10 @@ export class CoverageChartComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    this._axisLabels = this.coverageService.createAxisLabels(
-      this.timeWindow
-    );
-    this._coverageItems = this.coverageService.createCoverageItems(
-      this.timeWindow,
-      this.coverageItems
-    );
+    const vm = this.coverageService.createCoverageVM(this.timeWindow, this.coverageItems);
+
+    this._axisLabels = vm.axisLabels;
+    this._coverageItems = vm.coverageItems;
   }
 
   onBarClick(domEvent: MouseEvent, coveragePeriod: CoveragePeriodVM) {

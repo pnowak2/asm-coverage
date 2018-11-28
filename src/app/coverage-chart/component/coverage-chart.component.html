@@ -14,9 +14,9 @@
     <div class="progress asm-coverage-chart__item-progress">
       <div *ngFor="let period of item.periods" 
            (click)="onBarClick($event, period)" 
-           [style.width.%]="period.position"
-           class="asm-coverage-chart__item-progress-bar progress-bar bg-secondary {{ period.styleClass }}"
-           [class.bg-transparent]="period.isEmpty">
+           [style.width.%]="period.width"
+           [style.left.%]="period.offset"
+           class="asm-coverage-chart__item-progress-bar progress-bar bg-secondary {{ period.styleClass }}">
         <span *ngIf="period.label" 
               class="asm-coverage-chart__item-progress-text text-truncate">
           {{ period.label }}

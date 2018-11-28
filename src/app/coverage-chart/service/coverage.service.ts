@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { TimeWindow, AxisLabelVM, CoverageItemVM, CoverageItem } from '../model/coverage.model';
+import { TimeWindow, AxisLabelVM, CoverageItemVM, CoverageItem, CoverageVM } from '../model/coverage.model';
 
 @Injectable()
 export class CoverageService {
@@ -24,13 +24,22 @@ export class CoverageService {
     );
   }
 
-  createAxisLabels(timeWindow: TimeWindow): Array<AxisLabelVM> {
+  createCoverageVM(
+    timeWindow: TimeWindow,
+    cis: Array<CoverageItem> = []): CoverageVM {
     const tw = this.createTimeWindow(timeWindow);
-    const monthsCount = this.getMonthsDifference(tw.from, tw.to);
+    const axisLabels = this.createAxisLabels(tw);
+    const coverageItems = this.createCoverageItems(tw, cis);
+
+    return { axisLabels, coverageItems };
+  }
+
+  createAxisLabels(timeWindow: TimeWindow): Array<AxisLabelVM> {
+    const monthsCount = this.getMonthsDifference(timeWindow.from, timeWindow.to);
     const monthsToIterate = this.arrayWithRange(monthsCount);
 
     return monthsToIterate.map(monthNumber => {
-      const currentFromDate = moment(tw.from).add(monthNumber, 'month');
+      const currentFromDate = moment(timeWindow.from).add(monthNumber, 'month');
       const text = currentFromDate.format('MM/YY');
       const position = (monthNumber / (monthsCount - 1)) * 100;
 
@@ -41,16 +50,16 @@ export class CoverageService {
   createCoverageItems(
     timeWindow: TimeWindow,
     coverageItems: Array<CoverageItem> = []): Array<CoverageItemVM> {
-    const tw = this.createTimeWindow(timeWindow);
 
     return coverageItems.map(ci => {
       return {
         label: ci.label,
         periods: ci.periods.map(pd => {
           return {
-            position: 30,
             styleClass: pd.styleClass,
-            label: pd.label
+            label: pd.label,
+            width: 50,
+            offset: 40
           };
         })
       };

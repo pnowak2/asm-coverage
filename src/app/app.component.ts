@@ -14,7 +14,7 @@ export class AppComponent {
   constructor() {
     this.timeWindow = {
       from: moment('1/05/2017', 'DD-MM-YYYY').toDate(),
-      // to: moment('3/08/2018', 'DD-MM-YYYY').toDate()
+      to: moment('3/08/2018', 'DD-MM-YYYY').toDate()
     };
 
     this.coverageItems = [
@@ -22,12 +22,12 @@ export class AppComponent {
         label: 'OPSOMMER Gunnar (AF-00)',
         periods: [{
           label: 'IN DELEGATION',
-          from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
-          to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
+          from: moment('17/03/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('29/06/2017', 'DD-MM-YYYY').toDate(),
         },
         {
-          from: moment('1/08/2017', 'DD-MM-YYYY').toDate(),
-          to: moment('1/011/2017', 'DD-MM-YYYY').toDate(),
+          from: moment('24/08/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('16/011/2017', 'DD-MM-YYYY').toDate(),
           styleClass: 'bg-danger'
         }]
       },

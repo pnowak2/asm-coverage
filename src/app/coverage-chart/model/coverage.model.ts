@@ -32,6 +32,11 @@ export interface CoverageItemVM {
 export interface CoveragePeriodVM {
   label?: string;
   styleClass?: string;
-  position?: number;
-  isEmpty?: boolean;
+  width?: number;
+  offset?: number;
+}
+
+export interface CoverageVM {
+  axisLabels: Array<AxisLabelVM>;
+  coverageItems: Array<CoverageItemVM>;
 }
