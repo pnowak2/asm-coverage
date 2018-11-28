@@ -2,7 +2,7 @@
 
   <div class="asm-coverage-chart__x-axis">
     <div *ngFor="let label of _axisLabels" 
-        [style.left.%]="label.percentage"
+        [style.left.%]="label.position"
         class="asm-coverage-chart__x-axis-item">
         <div class="asm-coverage-chart__x-axis-item-text">{{ label.text }}</div>
         <div class="asm-coverage-chart__x-axis-item-line"></div>
@@ -14,7 +14,7 @@
     <div class="progress asm-coverage-chart__item-progress">
       <div *ngFor="let period of item.periods" 
            (click)="onBarClick($event, period)" 
-           [style.width.%]="period.percentage"
+           [style.width.%]="period.position"
            class="progress-bar bg-secondary {{ period.styleClass }}"
            [class.bg-transparent]="period.isEmpty">
         <span *ngIf="period.label" 

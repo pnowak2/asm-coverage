@@ -32,9 +32,9 @@ export class CoverageService {
     return monthsToIterate.map(monthNumber => {
       const currentFromDate = moment(tw.from).add(monthNumber, 'month');
       const text = currentFromDate.format('MM/YY');
-      const percentage = (monthNumber / (monthsCount - 1)) * 100;
+      const position = (monthNumber / (monthsCount - 1)) * 100;
 
-      return { percentage, text };
+      return { position, text };
     });
   }
 
@@ -48,19 +48,19 @@ export class CoverageService {
         label: 'OPSOMMER Gunnar (AF-00)',
         periods: [{
           label: 'IN DELEGATION',
-          percentage: 20,
+          position: 20,
           styleClass: 'progress-bar-striped progress-bar-animated'
         },
         {
           isEmpty: true,
-          percentage: 30
+          position: 30
         }, {
           label: 'IN DELEGATION',
-          percentage: 40,
+          position: 40,
           styleClass: 'bg-danger'
         }, {
           label: 'IN DELEGATION',
-          percentage: 10,
+          position: 10,
           styleClass: 'bg-success'
         }]
       },

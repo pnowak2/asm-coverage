@@ -20,7 +20,7 @@ export interface CoveragePeriodEvent {
 }
 
 export interface AxisLabelVM {
-  percentage: number;
+  position: number;
   text: string;
 }
 
@@ -32,6 +32,6 @@ export interface CoverageItemVM {
 export interface CoveragePeriodVM {
   label?: string;
   styleClass?: string;
-  percentage?: number;
+  position?: number;
   isEmpty?: boolean;
 }
