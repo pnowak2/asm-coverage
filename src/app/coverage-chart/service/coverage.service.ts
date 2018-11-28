@@ -43,27 +43,17 @@ export class CoverageService {
     coverageItems: Array<CoverageItem> = []): Array<CoverageItemVM> {
     const tw = this.createTimeWindow(timeWindow);
 
-    return [
-      {
-        label: 'OPSOMMER Gunnar (AF-00)',
-        periods: [{
-          label: 'IN DELEGATION',
-          position: 20,
-          styleClass: 'progress-bar-striped progress-bar-animated'
-        },
-        {
-          isEmpty: true,
-          position: 30
-        }, {
-          label: 'IN DELEGATION',
-          position: 40,
-          styleClass: 'bg-danger'
-        }, {
-          label: 'IN DELEGATION',
-          position: 10,
-          styleClass: 'bg-success'
-        }]
-      },
-    ];
+    return coverageItems.map(ci => {
+      return {
+        label: ci.label,
+        periods: ci.periods.map(pd => {
+          return {
+            position: 30,
+            styleClass: pd.styleClass,
+            label: pd.label
+          };
+        })
+      };
+    });
   }
 }

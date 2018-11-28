@@ -28,6 +28,7 @@ export class AppComponent {
         {
           from: moment('1/08/2017', 'DD-MM-YYYY').toDate(),
           to: moment('1/011/2017', 'DD-MM-YYYY').toDate(),
+          styleClass: 'bg-danger'
         }]
       },
     ];

@@ -25,7 +25,8 @@ export class CoverageChartComponent implements OnInit, OnChanges {
       this.timeWindow
     );
     this._coverageItems = this.coverageService.createCoverageItems(
-      this.timeWindow
+      this.timeWindow,
+      this.coverageItems
     );
   }
 
