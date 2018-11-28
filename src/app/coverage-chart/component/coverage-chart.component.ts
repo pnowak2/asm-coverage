@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { CoverageItem, TimeWindow, CoveragePeriodEvent, CoverageVM } from '../model/coverage.model';
+import { CoverageItem, DateRange, CoveragePeriodEvent, CoverageVM } from '../model/coverage.model';
 import { CoverageService } from '../service/coverage.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { CoverageService } from '../service/coverage.service';
   styleUrls: ['./coverage-chart.component.scss']
 })
 export class CoverageChartComponent implements  OnChanges {
-  @Input() timeWindow: TimeWindow;
+  @Input() timeWindow: DateRange;
   @Input() coverageItems: Array<CoverageItem> = [];
 
   @Output() barClick = new EventEmitter<CoveragePeriodEvent>();

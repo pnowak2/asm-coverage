@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { TimeWindow, AxisLabelVM, CoverageItemVM, CoverageItem, CoverageVM } from '../model/coverage.model';
+import { DateRange, AxisLabelVM, CoverageItemVM, CoverageItem, CoverageVM } from '../model/coverage.model';
 
 @Injectable()
 export class CoverageService {
@@ -9,7 +9,7 @@ export class CoverageService {
     return moment(to).diff(from, 'months', false) + 1;
   }
 
-  createTimeWindow(timeWindow: TimeWindow): TimeWindow {
+  createTimeWindow(timeWindow: DateRange): DateRange {
     const to = timeWindow.to || moment().toDate();
     const from = timeWindow.from || moment(to)
       .subtract(19, 'months')
@@ -18,11 +18,22 @@ export class CoverageService {
     return this.normalizeTimeWindow({ from, to });
   }
 
-  normalizeTimeWindow(timeWindow: TimeWindow): TimeWindow {
+  normalizeTimeWindow(timeWindow: DateRange): DateRange {
     return {
       from: moment(timeWindow.from).startOf('month').toDate(),
       to: moment(timeWindow.to).endOf('month').toDate()
     };
+  }
+
+  limitRangeToTimeWindow(range: DateRange, timeWindow: DateRange): DateRange {
+    const from = moment
+      .max(moment(range.from), moment(timeWindow.from))
+      .toDate();
+    const to = moment
+      .min(moment(range.to), moment(timeWindow.to))
+      .toDate();
+
+    return { from, to };
   }
 
   arrayWithRange(range: number) {
@@ -32,7 +43,7 @@ export class CoverageService {
   }
 
   createCoverageVM(
-    timeWindow: TimeWindow,
+    timeWindow: DateRange,
     cis: Array<CoverageItem> = []): CoverageVM {
     const tw = this.createTimeWindow(timeWindow);
     const axisLabels = this.createAxisLabels(tw);
@@ -41,7 +52,7 @@ export class CoverageService {
     return { axisLabels, coverageItems };
   }
 
-  createAxisLabels(timeWindow: TimeWindow): Array<AxisLabelVM> {
+  createAxisLabels(timeWindow: DateRange): Array<AxisLabelVM> {
     const monthsCount = this.getMonthsDifference(timeWindow.from, timeWindow.to);
     const monthsToIterate = this.arrayWithRange(monthsCount);
 
@@ -55,7 +66,7 @@ export class CoverageService {
   }
 
   createCoverageItems(
-    timeWindow: TimeWindow,
+    timeWindow: DateRange,
     coverageItems: Array<CoverageItem> = []): Array<CoverageItemVM> {
 
     const timeWindowStart = timeWindow.from.getTime();
@@ -65,14 +76,8 @@ export class CoverageService {
         label: ci.label,
         periods: ci.periods.map(pd => {
 
-          const leftClamp = moment
-            .max(moment(pd.from), moment(timeWindow.from));
-          const rightClamp = moment
-            .min(moment(pd.to), moment(timeWindow.to));
-
-          // console.log('normal', pd.from);
-          console.log('lclamped', leftClamp);
-          console.log('rclamped', rightClamp);
+          const range = this.limitRangeToTimeWindow(pd.range, timeWindow);
+          console.log(range);
 
           return {
             styleClass: pd.styleClass,

@@ -6,11 +6,10 @@ export interface CoverageItem {
 export interface CoveragePeriod {
   label?: string;
   styleClass?: string;
-  from: Date;
-  to: Date;
+  range?: DateRange;
 }
 
-export interface TimeWindow {
+export interface DateRange {
   from?: Date;
   to?: Date;
 }
