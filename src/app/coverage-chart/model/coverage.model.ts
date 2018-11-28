@@ -4,8 +4,8 @@ export interface CoverageItem {
 }
 
 export interface CoveragePeriod {
-  label: string;
-  styleClass: string;
+  label?: string;
+  styleClass?: string;
   from: Date;
   to: Date;
 }
@@ -15,7 +15,12 @@ export interface TimeWindow {
   to?: Date;
 }
 
-export interface AxisLabel {
+export interface AxisLabelVM {
   percentage: number;
   text: string;
+}
+
+export interface CoveragePeriodEvent {
+  domEvent: MouseEvent;
+  coveragePeriod: CoveragePeriod;
 }

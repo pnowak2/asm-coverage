@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { TimeWindow, AxisLabel } from '../model/coverage.model';
+import { TimeWindow, AxisLabelVM } from '../model/coverage.model';
 
 @Injectable()
 export class CoverageService {
@@ -24,7 +24,7 @@ export class CoverageService {
     );
   }
 
-  createAxisLabels(timeWindow: TimeWindow): Array<AxisLabel> {
+  createAxisLabels(timeWindow: TimeWindow): Array<AxisLabelVM> {
     const tw = this.sanitizeTimeWindow(timeWindow);
     const monthsCount = this.getMonthsDifference(tw.from, tw.to);
     const monthsToIterate = this.arrayWithRange(monthsCount);

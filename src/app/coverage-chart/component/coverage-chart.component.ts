@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { CoverageItem, TimeWindow, AxisLabel } from '../model/coverage.model';
+import { CoverageItem, TimeWindow, AxisLabelVM, CoveragePeriodEvent, CoveragePeriod } from '../model/coverage.model';
 import { CoverageService } from '../service/coverage.service';
 
 @Component({
@@ -8,11 +8,12 @@ import { CoverageService } from '../service/coverage.service';
   styleUrls: ['./coverage-chart.component.scss']
 })
 export class CoverageChartComponent implements OnInit, OnChanges {
-  @Input() coverageData: Array<CoverageItem> = [];
   @Input() timeWindow: TimeWindow;
-  @Output() barClick = new EventEmitter<{ domEvent: MouseEvent }>();
+  @Input() coverageItems: Array<CoverageItem> = [];
 
-  axisLabels: Array<AxisLabel> = [];
+  @Output() barClick = new EventEmitter<CoveragePeriodEvent>();
+
+  axisLabels: Array<AxisLabelVM> = [];
 
   constructor(private coverageService: CoverageService) { }
 
@@ -25,9 +26,7 @@ export class CoverageChartComponent implements OnInit, OnChanges {
     );
   }
 
-  onBarClick(evt: MouseEvent) {
-    this.barClick.next({
-      domEvent: evt
-    });
+  onBarClick(domEvent: MouseEvent, coveragePeriod: CoveragePeriod) {
+    this.barClick.next({ domEvent, coveragePeriod });
   }
 }
