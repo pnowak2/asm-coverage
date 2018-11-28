@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { TimeWindow, AxisLabel } from '../model/coverage.model';
+import { TimeWindow, AxisLabelVM, CoverageItemVM, CoverageItem, CoverageVM } from '../model/coverage.model';
 
 @Injectable()
 export class CoverageService {
@@ -9,7 +9,7 @@ export class CoverageService {
     return moment(to).diff(from, 'months', false) + 1;
   }
 
-  sanitizeTimeWindow(timeWindow: TimeWindow): TimeWindow {
+  createTimeWindow(timeWindow: TimeWindow): TimeWindow {
     const to = timeWindow.to || moment().toDate();
     const from = timeWindow.from || moment(to)
       .subtract(19, 'months')
@@ -24,17 +24,45 @@ export class CoverageService {
     );
   }
 
-  createAxisLabels(timeWindow: TimeWindow): Array<AxisLabel> {
-    const tw = this.sanitizeTimeWindow(timeWindow);
-    const monthsCount = this.getMonthsDifference(tw.from, tw.to);
+  createCoverageVM(
+    timeWindow: TimeWindow,
+    cis: Array<CoverageItem> = []): CoverageVM {
+    const tw = this.createTimeWindow(timeWindow);
+    const axisLabels = this.createAxisLabels(tw);
+    const coverageItems = this.createCoverageItems(tw, cis);
+
+    return { axisLabels, coverageItems };
+  }
+
+  createAxisLabels(timeWindow: TimeWindow): Array<AxisLabelVM> {
+    const monthsCount = this.getMonthsDifference(timeWindow.from, timeWindow.to);
     const monthsToIterate = this.arrayWithRange(monthsCount);
 
     return monthsToIterate.map(monthNumber => {
-      const currentFromDate = moment(tw.from).add(monthNumber, 'month');
+      const currentFromDate = moment(timeWindow.from).add(monthNumber, 'month');
       const text = currentFromDate.format('MM/YY');
-      const percentage = (monthNumber / (monthsCount - 1)) * 100;
+      const position = (monthNumber / (monthsCount - 1)) * 100;
 
-      return { percentage, text };
+      return { position, text };
+    });
+  }
+
+  createCoverageItems(
+    timeWindow: TimeWindow,
+    coverageItems: Array<CoverageItem> = []): Array<CoverageItemVM> {
+
+    return coverageItems.map(ci => {
+      return {
+        label: ci.label,
+        periods: ci.periods.map(pd => {
+          return {
+            styleClass: pd.styleClass,
+            label: pd.label,
+            width: 50,
+            offset: 40
+          };
+        })
+      };
     });
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TimeWindow } from './coverage-chart/model/coverage.model';
+import { TimeWindow, CoverageItem } from './coverage-chart/model/coverage.model';
 import * as moment from 'moment';
 
 @Component({
@@ -9,12 +9,29 @@ import * as moment from 'moment';
 })
 export class AppComponent {
   timeWindow: TimeWindow;
+  coverageItems: Array<CoverageItem>;
 
   constructor() {
     this.timeWindow = {
-      // from: moment('1/05/2017', 'DD-MM-YYYY').toDate(),
-      // to: moment('3/08/2018', 'DD-MM-YYYY').toDate()
+      from: moment('1/05/2017', 'DD-MM-YYYY').toDate(),
+      to: moment('3/08/2018', 'DD-MM-YYYY').toDate()
     };
+
+    this.coverageItems = [
+      {
+        label: 'OPSOMMER Gunnar (AF-00)',
+        periods: [{
+          label: 'IN DELEGATION',
+          from: moment('17/03/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('29/06/2017', 'DD-MM-YYYY').toDate(),
+        },
+        {
+          from: moment('24/08/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('16/011/2017', 'DD-MM-YYYY').toDate(),
+          styleClass: 'bg-danger'
+        }]
+      },
+    ];
   }
 
   onBarClick(evt) {
