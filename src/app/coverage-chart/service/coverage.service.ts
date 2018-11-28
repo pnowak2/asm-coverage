@@ -50,14 +50,26 @@ export class CoverageService {
           label: 'IN DELEGATION',
           from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
           to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
-          percentage: 20
+          percentage: 20,
+          styleClass: 'progress-bar-striped progress-bar-animated'
         },
         {
           from: moment('1/08/2017', 'DD-MM-YYYY').toDate(),
           to: moment('1/011/2017', 'DD-MM-YYYY').toDate(),
           isEmpty: true,
-          styleClass: 'progress-bar-striped',
           percentage: 30
+        }, {
+          label: 'IN DELEGATION',
+          from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
+          percentage: 40,
+          styleClass: 'bg-danger'
+        }, {
+          label: 'IN DELEGATION',
+          from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
+          to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
+          percentage: 10,
+          styleClass: 'bg-success'
         }]
       },
     ];
