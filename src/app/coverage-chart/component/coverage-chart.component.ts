@@ -30,6 +30,6 @@ export class CoverageChartComponent implements OnInit, OnChanges {
   }
 
   onBarClick(domEvent: MouseEvent, coveragePeriod: CoveragePeriodVM) {
-    this.barClick.next({ domEvent, coveragePeriod });
+    this.barClick.next({ domEvent });
   }
 }

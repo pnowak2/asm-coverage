@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { TimeWindow, AxisLabelVM, CoverageItemVM } from '../model/coverage.model';
+import { TimeWindow, AxisLabelVM, CoverageItemVM, CoverageItem } from '../model/coverage.model';
 
 @Injectable()
 export class CoverageService {
@@ -38,36 +38,28 @@ export class CoverageService {
     });
   }
 
-  createCoverageItems(timeWindow: TimeWindow): Array<CoverageItemVM> {
+  createCoverageItems(
+    timeWindow: TimeWindow,
+    coverageItems: Array<CoverageItem> = []): Array<CoverageItemVM> {
     const tw = this.createTimeWindow(timeWindow);
-    const monthsCount = this.getMonthsDifference(tw.from, tw.to);
-    const monthsToIterate = this.arrayWithRange(monthsCount);
 
     return [
       {
         label: 'OPSOMMER Gunnar (AF-00)',
         periods: [{
           label: 'IN DELEGATION',
-          from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
-          to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
           percentage: 20,
           styleClass: 'progress-bar-striped progress-bar-animated'
         },
         {
-          from: moment('1/08/2017', 'DD-MM-YYYY').toDate(),
-          to: moment('1/011/2017', 'DD-MM-YYYY').toDate(),
           isEmpty: true,
           percentage: 30
         }, {
           label: 'IN DELEGATION',
-          from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
-          to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
           percentage: 40,
           styleClass: 'bg-danger'
         }, {
           label: 'IN DELEGATION',
-          from: moment('1/03/2017', 'DD-MM-YYYY').toDate(),
-          to: moment('1/06/2017', 'DD-MM-YYYY').toDate(),
           percentage: 10,
           styleClass: 'bg-success'
         }]

@@ -13,8 +13,8 @@
     <div class="asm-coverage-chart__item-text">{{ item.label }}</div>
     <div class="progress asm-coverage-chart__item-progress">
       <div *ngFor="let period of item.periods" 
-           [style.width.%]="period.percentage"
            (click)="onBarClick($event, period)" 
+           [style.width.%]="period.percentage"
            class="progress-bar bg-secondary {{ period.styleClass }}"
            [class.bg-transparent]="period.isEmpty">
         <span *ngIf="period.label" 
