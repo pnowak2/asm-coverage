@@ -2,7 +2,7 @@
 
   <div class="asm-coverage-chart__x-axis">
     <div *ngFor="let label of axisLabels" 
-        [style.left.%]="label.position"
+        [style.left.%]="label.percentage"
         class="asm-coverage-chart__x-axis-item">
         <div class="asm-coverage-chart__x-axis-item-text">{{ label.text }}</div>
         <div class="asm-coverage-chart__x-axis-item-line"></div>
@@ -12,7 +12,7 @@
   <div class="asm-coverage-chart__item">
     <div class="asm-coverage-chart__item-text">OPSOMMER Gunnar <span class="text-muted">(AF-00)</span></div>
     <div class="progress asm-coverage-chart__item-progress">
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width: 15%">
+      <div (click)="onBarClick($event)" class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" style="width: 15%">
         <span class="asm-coverage-chart__item-progress-text text-truncate">IN DELEGATION</span>
       </div>
       <div class="progress-bar bg-info" style="width: 25%"></div>

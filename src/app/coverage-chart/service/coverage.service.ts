@@ -18,23 +18,23 @@ export class CoverageService {
     return { from, to };
   }
 
-  createArray(n: number) {
+  arrayWithRange(range: number) {
     return Array.from(
-      Array(n).keys()
+      Array(range).keys()
     );
   }
 
   createAxisLabels(timeWindow: TimeWindow): Array<AxisLabel> {
     const tw = this.sanitizeTimeWindow(timeWindow);
     const monthsCount = this.getMonthsDifference(tw.from, tw.to);
-    const monthsToIterate = this.createArray(monthsCount);
+    const monthsToIterate = this.arrayWithRange(monthsCount);
 
     return monthsToIterate.map(monthNumber => {
-      const currentFrom = moment(tw.from).add(monthNumber, 'month');
-      const text = currentFrom.format('MM/YY');
-      const position = (monthNumber / (monthsCount - 1)) * 100;
+      const currentFromDate = moment(tw.from).add(monthNumber, 'month');
+      const text = currentFromDate.format('MM/YY');
+      const percentage = (monthNumber / (monthsCount - 1)) * 100;
 
-      return { position, text };
+      return { percentage, text };
     });
   }
 }

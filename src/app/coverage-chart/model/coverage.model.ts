@@ -16,6 +16,6 @@ export interface TimeWindow {
 }
 
 export interface AxisLabel {
-  position: number;
+  percentage: number;
   text: string;
 }

@@ -12,8 +12,12 @@ export class AppComponent {
 
   constructor() {
     this.timeWindow = {
-      from: moment('1/05/2017', 'DD-MM-YYYY').toDate(),
-      to: moment('3/08/2018', 'DD-MM-YYYY').toDate()
+      // from: moment('1/05/2017', 'DD-MM-YYYY').toDate(),
+      // to: moment('3/08/2018', 'DD-MM-YYYY').toDate()
     };
+  }
+
+  onBarClick(evt) {
+    console.log('bar click', evt);
   }
 }
