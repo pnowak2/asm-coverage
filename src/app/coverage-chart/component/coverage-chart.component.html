@@ -1,7 +1,7 @@
 <div class="asm-coverage-chart">
 
   <div class="asm-coverage-chart__x-axis">
-    <div *ngFor="let label of _axisLabels" 
+    <div *ngFor="let label of vm.axisLabels" 
         [style.left.%]="label.position"
         class="asm-coverage-chart__x-axis-item">
         <div class="asm-coverage-chart__x-axis-item-text">{{ label.text }}</div>
@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div *ngFor="let item of _coverageItems" class="asm-coverage-chart__item">
+  <div *ngFor="let item of vm.coverageItems" class="asm-coverage-chart__item">
     <div class="asm-coverage-chart__item-text">{{ item.label }}</div>
     <div class="progress asm-coverage-chart__item-progress">
       <div *ngFor="let period of item.periods" 

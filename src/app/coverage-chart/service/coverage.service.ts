@@ -51,6 +51,8 @@ export class CoverageService {
     timeWindow: TimeWindow,
     coverageItems: Array<CoverageItem> = []): Array<CoverageItemVM> {
 
+    const timeWindowStart = timeWindow.from.getTime();
+
     return coverageItems.map(ci => {
       return {
         label: ci.label,

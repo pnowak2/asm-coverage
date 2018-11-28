@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { CoverageItem, TimeWindow, AxisLabelVM, CoveragePeriodEvent, CoverageItemVM, CoveragePeriodVM } from '../model/coverage.model';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { CoverageItem, TimeWindow, CoveragePeriodEvent, CoverageVM } from '../model/coverage.model';
 import { CoverageService } from '../service/coverage.service';
 
 @Component({
@@ -7,27 +7,23 @@ import { CoverageService } from '../service/coverage.service';
   templateUrl: './coverage-chart.component.html',
   styleUrls: ['./coverage-chart.component.scss']
 })
-export class CoverageChartComponent implements OnInit, OnChanges {
+export class CoverageChartComponent implements  OnChanges {
   @Input() timeWindow: TimeWindow;
   @Input() coverageItems: Array<CoverageItem> = [];
 
   @Output() barClick = new EventEmitter<CoveragePeriodEvent>();
 
-  _axisLabels: Array<AxisLabelVM> = [];
-  _coverageItems: Array<CoverageItemVM> = [];
+  vm: CoverageVM;
 
   constructor(private coverageService: CoverageService) { }
 
-  ngOnInit() { }
-
   ngOnChanges(changes: SimpleChanges) {
-    const vm = this.coverageService.createCoverageVM(this.timeWindow, this.coverageItems);
-
-    this._axisLabels = vm.axisLabels;
-    this._coverageItems = vm.coverageItems;
+    this.vm = this.coverageService.createCoverageVM(
+      this.timeWindow, this.coverageItems
+    );
   }
 
-  onBarClick(domEvent: MouseEvent, coveragePeriod: CoveragePeriodVM) {
+  onBarClick(domEvent: MouseEvent) {
     this.barClick.next({ domEvent });
   }
 }
