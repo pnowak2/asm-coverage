@@ -14,7 +14,7 @@ export class AppComponent {
   constructor() {
     this.timeWindow = {
       from: moment('1/5/2017', 'DD-MM-YYYY').toDate(),
-      to: moment('1/9/2017', 'DD-MM-YYYY').toDate()
+      to: moment('1/9/2018', 'DD-MM-YYYY').toDate()
     };
 
     this.coverageItems = [
@@ -28,6 +28,7 @@ export class AppComponent {
           }
         },
         {
+          label: 'IMPORTANT',
           styleClass: 'bg-danger',
           range: {
             from: moment('1/1/2018', 'DD-MM-YYYY').toDate(),

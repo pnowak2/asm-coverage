@@ -19,10 +19,12 @@ export class CoverageService {
     const monthsCount = this.getMonthsInRange(timeWindow);
     const monthsToIterate = this.arrayOfItems(monthsCount);
 
+    const totalWidth = timeWindow.to.getTime() - timeWindow.from.getTime();
+
     return monthsToIterate.map(monthNumber => {
       const currentFromDate = moment(timeWindow.from).add(monthNumber, 'month');
       const text = currentFromDate.format('MM/YY');
-      const position = (monthNumber / (monthsCount - 1)) * 100;
+      const position = ((currentFromDate.toDate().getTime() - timeWindow.from.getTime()) / totalWidth) * 100;
 
       return { position, text };
     });
@@ -36,10 +38,6 @@ export class CoverageService {
       return {
         label: ci.label,
         periods: ci.periods
-          // .filter(pd => {
-          //   return moment(pd.range.from).isBetween(timeWindow.from, timeWindow.to) ||
-          //     moment(pd.range.to).isBetween(timeWindow.from, timeWindow.to);
-          // })
           .map(pd => {
             const periodRange = this.limitRangeToTimeWindow(pd.range, timeWindow);
             const width = this.calculatePeriodPercentage(periodRange, timeWindow);
@@ -88,15 +86,10 @@ export class CoverageService {
     const totalWidth = timeWindow.to.getTime() - timeWindow.from.getTime();
     const periodWidth = period.to.getTime() - period.from.getTime();
 
-    console.log(periodWidth / totalWidth);
-
     return (periodWidth / totalWidth) * 100;
   }
 
   calculatePeriodOffset(period: DateRange, timeWindow: DateRange): number {
-    console.log('p', period);
-    console.log('w', timeWindow);
-
     const totalWidth = timeWindow.to.getTime() - timeWindow.from.getTime();
     const windowFrom = timeWindow.from.getTime();
     const periodFrom = period.from.getTime();
