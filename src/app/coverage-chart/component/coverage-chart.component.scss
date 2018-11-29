@@ -1,7 +1,7 @@
 .asm-coverage-chart { 
   position: relative;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.2rem;
+  padding-bottom: 0.3rem;
  
   &__item {
     display: flex;
@@ -9,7 +9,7 @@
     align-items: center;
     
     &:not(:last-child) {
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.3rem;
     }
 
     &-text {
@@ -24,14 +24,18 @@
 
     &-progress-text {
       line-height: 0.75rem;
+      text-transform: uppercase;
+      user-select: none;
     }
 
     &-progress {
       flex: 1 1 auto;
       position: relative;
+      height: 1.5rem;
     }
 
     &-progress-bar {
+      background-color: #757575;
       cursor: pointer;
       position: absolute;
       height: inherit;

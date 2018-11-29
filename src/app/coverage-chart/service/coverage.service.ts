@@ -38,20 +38,19 @@ export class CoverageService {
     return coverageItems.map(ci => {
       return {
         label: ci.label,
-        periods: ci.periods
-          .map(pd => {
-            const periodRange = this.limitRangeToTimeWindow(pd.range, timeWindow);
-            const width = this.calculatePeriodPercentageWidth(periodRange, timeWindow);
-            const offset = this.calculatePeriodPercentageOffset(periodRange, timeWindow);
+        periods: ci.periods.map(pd => {
+          const periodRange = this.limitRangeToTimeWindow(pd.range, timeWindow);
+          const width = this.calculatePeriodPercentageWidth(periodRange, timeWindow);
+          const offset = this.calculatePeriodPercentageOffset(periodRange, timeWindow);
 
-            return {
-              styleClass: pd.styleClass,
-              label: pd.label,
-              width: width,
-              offset: offset,
-              originalPeriod: pd
-            };
-          })
+          return {
+            styleClass: pd.styleClass,
+            label: pd.label,
+            width: width,
+            offset: offset,
+            originalPeriod: pd
+          };
+        })
       };
     });
   }
@@ -60,7 +59,7 @@ export class CoverageService {
     return moment(range.to).diff(range.from, 'months', false) + 1;
   }
 
-  createDefaultTimeWindow(timeWindow: DateRange): DateRange {
+  createDefaultTimeWindow(timeWindow: DateRange = {}): DateRange {
     const to = timeWindow.to || moment().toDate();
     const from = timeWindow.from || moment(to)
       .subtract(this.MONTHS, 'months')
@@ -72,7 +71,7 @@ export class CoverageService {
   resetRangeToBeginningOfMonth(range: DateRange): DateRange {
     return {
       from: moment(range.from).startOf('month').toDate(),
-      to: moment(range.to).startOf('month').toDate()
+      to: moment(range.to).add(1, 'month').startOf('month').toDate()
     };
   }
 

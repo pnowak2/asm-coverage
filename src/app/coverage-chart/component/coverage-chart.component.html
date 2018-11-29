@@ -16,7 +16,7 @@
            (click)="onBarClick($event, period.originalPeriod)" 
            [style.width.%]="period.width"
            [style.left.%]="period.offset"
-           class="asm-coverage-chart__item-progress-bar progress-bar bg-secondary {{ period.styleClass }}">
+           class="asm-coverage-chart__item-progress-bar progress-bar {{ period.styleClass }}">
         <span *ngIf="period.label" 
               class="asm-coverage-chart__item-progress-text text-truncate">
           {{ period.label }}
