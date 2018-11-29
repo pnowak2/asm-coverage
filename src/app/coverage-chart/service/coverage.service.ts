@@ -4,6 +4,7 @@ import { DateRange, HorizontalAxisLabelVM, CoverageItemVM, CoverageItem, Coverag
 
 @Injectable()
 export class CoverageService {
+  private readonly MONTHS = 19;
 
   createCoverageVM(
     items: Array<CoverageItem> = [],
@@ -16,15 +17,15 @@ export class CoverageService {
   }
 
   createAxisLabels(timeWindow: DateRange): Array<HorizontalAxisLabelVM> {
-    const monthsCount = this.getMonthsInRange(timeWindow);
+    const monthsCount = this.getMonthsCountInRange(timeWindow);
     const monthsToIterate = this.arrayOfItems(monthsCount);
-
     const totalWidth = timeWindow.to.getTime() - timeWindow.from.getTime();
 
     return monthsToIterate.map(monthNumber => {
       const currentFromDate = moment(timeWindow.from).add(monthNumber, 'month');
       const text = currentFromDate.format('MM/YY');
-      const position = ((currentFromDate.toDate().getTime() - timeWindow.from.getTime()) / totalWidth) * 100;
+      const positionOffset = currentFromDate.toDate().getTime() - timeWindow.from.getTime();
+      const position = (positionOffset / totalWidth) * 100;
 
       return { position, text };
     });
@@ -40,8 +41,8 @@ export class CoverageService {
         periods: ci.periods
           .map(pd => {
             const periodRange = this.limitRangeToTimeWindow(pd.range, timeWindow);
-            const width = this.calculatePeriodPercentage(periodRange, timeWindow);
-            const offset = this.calculatePeriodOffset(periodRange, timeWindow);
+            const width = this.calculatePeriodPercentageWidth(periodRange, timeWindow);
+            const offset = this.calculatePeriodPercentageOffset(periodRange, timeWindow);
 
             return {
               styleClass: pd.styleClass,
@@ -55,20 +56,20 @@ export class CoverageService {
     });
   }
 
-  getMonthsInRange(range: DateRange) {
+  getMonthsCountInRange(range: DateRange): number {
     return moment(range.to).diff(range.from, 'months', false) + 1;
   }
 
   createDefaultTimeWindow(timeWindow: DateRange): DateRange {
     const to = timeWindow.to || moment().toDate();
     const from = timeWindow.from || moment(to)
-      .subtract(19, 'months')
+      .subtract(this.MONTHS, 'months')
       .toDate();
 
-    return this.normalizeTimeWindow({ from, to });
+    return this.resetRangeToBeginningOfMonth({ from, to });
   }
 
-  normalizeTimeWindow(range: DateRange): DateRange {
+  resetRangeToBeginningOfMonth(range: DateRange): DateRange {
     return {
       from: moment(range.from).startOf('month').toDate(),
       to: moment(range.to).startOf('month').toDate()
@@ -82,14 +83,14 @@ export class CoverageService {
     return { from, to };
   }
 
-  calculatePeriodPercentage(period: DateRange, timeWindow: DateRange): number {
+  calculatePeriodPercentageWidth(period: DateRange, timeWindow: DateRange): number {
     const totalWidth = timeWindow.to.getTime() - timeWindow.from.getTime();
     const periodWidth = period.to.getTime() - period.from.getTime();
 
     return (periodWidth / totalWidth) * 100;
   }
 
-  calculatePeriodOffset(period: DateRange, timeWindow: DateRange): number {
+  calculatePeriodPercentageOffset(period: DateRange, timeWindow: DateRange): number {
     const totalWidth = timeWindow.to.getTime() - timeWindow.from.getTime();
     const windowFrom = timeWindow.from.getTime();
     const periodFrom = period.from.getTime();
