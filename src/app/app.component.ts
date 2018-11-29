@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DateRange, CoverageItem } from './coverage-chart/model/coverage.model';
+import { DateRange, CoverageItem, CoveragePeriodEvent } from './coverage-chart/model/coverage.model';
 import * as moment from 'moment';
 
 @Component({
@@ -13,8 +13,8 @@ export class AppComponent {
 
   constructor() {
     this.timeWindow = {
-      from: moment('1/05/2017', 'DD-MM-YYYY').toDate(),
-      to: moment('3/08/2018', 'DD-MM-YYYY').toDate()
+      from: moment('1/5/2017', 'DD-MM-YYYY').toDate(),
+      to: moment('1/9/2017', 'DD-MM-YYYY').toDate()
     };
 
     this.coverageItems = [
@@ -23,22 +23,30 @@ export class AppComponent {
         periods: [{
           label: 'IN DELEGATION',
           range: {
-            from: moment('17/03/2017', 'DD-MM-YYYY').toDate(),
-            to: moment('30/09/2019', 'DD-MM-YYYY').toDate()
+            from: moment('1/6/2017', 'DD-MM-YYYY').toDate(),
+            to: moment('1/7/2017', 'DD-MM-YYYY').toDate()
           }
         },
         {
+          styleClass: 'bg-danger',
           range: {
-            from: moment('24/08/2017', 'DD-MM-YYYY').toDate(),
-            to: moment('16/01/2018', 'DD-MM-YYYY').toDate()
-          },
-          styleClass: 'bg-danger'
+            from: moment('1/1/2018', 'DD-MM-YYYY').toDate(),
+            to: moment('1/5/2018', 'DD-MM-YYYY').toDate()
+          }
+        },
+        {
+          label: 'OTHER',
+          styleClass: 'bg-success',
+          range: {
+            from: moment('1/6/2018', 'DD-MM-YYYY').toDate(),
+            to: moment('1/7/2018', 'DD-MM-YYYY').toDate()
+          }
         }]
       },
     ];
   }
 
-  onBarClick(evt) {
+  onBarClick(evt: CoveragePeriodEvent) {
     console.log('bar click', evt);
   }
 }

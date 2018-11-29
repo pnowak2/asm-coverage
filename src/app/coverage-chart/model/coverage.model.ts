@@ -16,9 +16,10 @@ export interface DateRange {
 
 export interface CoveragePeriodEvent {
   domEvent: MouseEvent;
+  period: CoveragePeriod;
 }
 
-export interface AxisLabelVM {
+export interface HorizontalAxisLabelVM {
   position: number;
   text: string;
 }
@@ -29,13 +30,14 @@ export interface CoverageItemVM {
 }
 
 export interface CoveragePeriodVM {
-  label?: string;
-  styleClass?: string;
-  width?: number;
-  offset?: number;
+  label: string;
+  styleClass: string;
+  width: number;
+  offset: number;
+  originalPeriod: CoveragePeriod;
 }
 
 export interface CoverageVM {
-  axisLabels: Array<AxisLabelVM>;
+  axisLabels: Array<HorizontalAxisLabelVM>;
   coverageItems: Array<CoverageItemVM>;
 }
