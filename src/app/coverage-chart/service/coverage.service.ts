@@ -112,8 +112,6 @@ export class CoverageService {
   }
 
   isRangeIntersectingTimeWindow(range: DateRange = {}, timeWindow: DateRange = {}): boolean {
-    const periodWidth = moment(range.to).diff(range.from);
-
     const isFromInside = range.from.getTime() <= timeWindow.to.getTime();
     const isToInside = range.to.getTime() >= timeWindow.from.getTime();
 
@@ -127,7 +125,7 @@ export class CoverageService {
       case 'quarter':
         return '\\QQ/YY';
       case 'month':
-        return 'MM/YY';
+        return 'M/YY';
       case 'week':
         return 'w/YY';
       default:
