@@ -67,7 +67,7 @@ export class AppComponent {
           label: 'THE ONE',
           range: {
             from: moment('1/1/2016', 'DD-MM-YYYY').toDate(),
-            to: moment('1/3/2017', 'DD-MM-YYYY').toDate()
+            to: moment('1/6/2017', 'DD-MM-YYYY').toDate()
           }
         },
         {
@@ -82,5 +82,27 @@ export class AppComponent {
 
   onBarClick(evt: CoveragePeriodEvent) {
     console.log('bar click', evt);
+  }
+
+  onBarMouseover(evt: CoveragePeriodEvent) {
+    console.log('bar mouse over', evt);
+  }
+
+  onBarMouseout(evt: CoveragePeriodEvent) {
+    console.log('bar mouse out', evt);
+  }
+
+  moveTimeWindowUp() {
+    this.timeWindow = {
+      from: moment(this.timeWindow.from).add(1, 'months').toDate(),
+      to: moment(this.timeWindow.to).add(1, 'months').toDate()
+    };
+  }
+
+  moveTimeWindowDown() {
+    this.timeWindow = {
+      from: moment(this.timeWindow.from).subtract(1, 'months').toDate(),
+      to: moment(this.timeWindow.to).subtract(1, 'months').toDate()
+    };
   }
 }

@@ -12,6 +12,8 @@ export class CoverageChartComponent implements OnChanges {
   @Input() coverageItems: Array<CoverageItem> = [];
 
   @Output() barClick = new EventEmitter<CoveragePeriodEvent>();
+  @Output() barMouseover = new EventEmitter<CoveragePeriodEvent>();
+  @Output() barMouseout = new EventEmitter<CoveragePeriodEvent>();
 
   vm: CoverageVM;
 
@@ -26,5 +28,13 @@ export class CoverageChartComponent implements OnChanges {
 
   onBarClick(domEvent: MouseEvent, period: CoveragePeriod) {
     this.barClick.next({ domEvent, period });
+  }
+
+  onBarMouseover(domEvent: MouseEvent, period: CoveragePeriod) {
+    this.barMouseover.next({ domEvent, period });
+  }
+
+  onBarMouseout(domEvent: MouseEvent, period: CoveragePeriod) {
+    this.barMouseout.next({ domEvent, period });
   }
 }

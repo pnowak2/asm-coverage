@@ -1,5 +1,10 @@
 <asm-coverage-chart 
   [timeWindow]="timeWindow" 
   [coverageItems]="coverageItems"
-  (barClick)="onBarClick($event)">
+  (barClick)="onBarClick($event)"
+  (barMouseover)="onBarMouseover($event)"
+  (barMouseout)="onBarMouseout($event)">
 </asm-coverage-chart>
+
+<button (click)="moveTimeWindowUp()">+3 months</button>
+<button (click)="moveTimeWindowDown()">-3 months</button>
