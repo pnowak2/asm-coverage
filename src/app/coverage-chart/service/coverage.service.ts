@@ -132,10 +132,4 @@ export class CoverageService {
         return 'MM/YY';
     }
   }
-
-  arrayOfItems(n: number) {
-    return Array.from(
-      Array(n).keys()
-    );
-  }
 }
