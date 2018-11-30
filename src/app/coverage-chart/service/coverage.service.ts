@@ -22,7 +22,7 @@ export class CoverageService {
     const totalWidth = moment(timeWindow.to).diff(timeWindow.from);
     let currentFromDate = moment(timeWindow.from);
 
-    while (currentFromDate.isBefore(timeWindow.to)) {
+    while (currentFromDate.isSameOrBefore(timeWindow.to)) {
       const dateFormat = this.createDateFormat(resolution);
       const text = currentFromDate.format(dateFormat);
       const positionOffset = moment(currentFromDate).diff(timeWindow.from);
