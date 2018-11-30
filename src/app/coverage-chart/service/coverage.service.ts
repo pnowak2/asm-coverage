@@ -9,15 +9,15 @@ export class CoverageService {
   createCoverageVM(
     items: Array<CoverageItem> = [],
     timeWindow: DateRange,
-    resolution: string): CoverageVM {
-    const dtw = this.createDefaultTimeWindow(timeWindow);
+    resolution: string = 'month'): CoverageVM {
+    const dtw = this.createDefaultTimeWindow(timeWindow, resolution);
     const axisLabels = this.createAxisLabels(dtw, resolution);
     const coverageItems = this.createCoverageItems(items, dtw);
 
     return { axisLabels, coverageItems };
   }
 
-  createAxisLabels(timeWindow: DateRange, resolution: string = 'month'): Array<HorizontalAxisLabelVM> {
+  createAxisLabels(timeWindow: DateRange, resolution: string): Array<HorizontalAxisLabelVM> {
     const labels: Array<HorizontalAxisLabelVM> = [];
     const totalWidth = moment(timeWindow.to).diff(timeWindow.from);
     let currentFromDate = moment(timeWindow.from);
@@ -62,27 +62,23 @@ export class CoverageService {
     });
   }
 
-  getMonthsCountInRange(range: DateRange): number {
-    return moment(range.to).diff(range.from, 'months', false) + 1;
-  }
-
-  createDefaultTimeWindow(timeWindow: DateRange = {}): DateRange {
+  createDefaultTimeWindow(timeWindow: DateRange = {}, resolution: string): DateRange {
     const to = timeWindow.to || moment().toDate();
     const from = timeWindow.from || moment(to)
       .subtract(this.MONTHS, 'months')
       .toDate();
 
-    return this.resetRangeToFullMonths({ from, to });
+    return this.resetRangeToFullPeriod({ from, to }, resolution);
   }
 
-  resetRangeToFullMonths(range: DateRange): DateRange {
+  resetRangeToFullPeriod(range: DateRange, resolution: string): DateRange {
     return {
       from: moment(range.from)
-        .startOf('month')
+        .startOf(<any>resolution)
         .toDate(),
       to: moment(range.to)
-        .add(1, 'month')
-        .startOf('month')
+        .add(1, <any>resolution)
+        .startOf(<any>resolution)
         .toDate()
     };
   }
