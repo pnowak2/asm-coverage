@@ -55,6 +55,11 @@
       position: absolute;
       bottom: 0;
       height: 100%;
+      z-index: 1;
+
+      &:last-child {
+        transform: translate(-1px);
+      }
 
       &-text {
         position: absolute;
