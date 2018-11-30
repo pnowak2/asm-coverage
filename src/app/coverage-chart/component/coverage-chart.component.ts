@@ -8,6 +8,7 @@ import { CoverageService } from '../service/coverage.service';
   styleUrls: ['./coverage-chart.component.scss']
 })
 export class CoverageChartComponent implements OnChanges {
+  @Input() resolution: 'day' | 'week' | 'month' | 'quarter' | 'year' = 'month';
   @Input() timeWindow: DateRange;
   @Input() coverageItems: Array<CoverageItem> = [];
 
@@ -22,7 +23,8 @@ export class CoverageChartComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.vm = this.coverageService.createCoverageVM(
       this.coverageItems,
-      this.timeWindow
+      this.timeWindow,
+      this.resolution
     );
   }
 

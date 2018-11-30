@@ -10,6 +10,7 @@ import * as moment from 'moment';
 export class AppComponent {
   timeWindow: DateRange;
   coverageItems: Array<CoverageItem>;
+  resolution: string;
 
   constructor() {
     this.timeWindow = {
@@ -90,6 +91,10 @@ export class AppComponent {
 
   onBarMouseout(evt: CoveragePeriodEvent) {
     console.log('bar mouse out', evt);
+  }
+
+  onResolutionClick(resolution: string) {
+    this.resolution = resolution;
   }
 
   moveTimeWindowUp() {

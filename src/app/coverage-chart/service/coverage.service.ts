@@ -8,27 +8,32 @@ export class CoverageService {
 
   createCoverageVM(
     items: Array<CoverageItem> = [],
-    timeWindow: DateRange): CoverageVM {
+    timeWindow: DateRange,
+    resolution: string): CoverageVM {
     const dtw = this.createDefaultTimeWindow(timeWindow);
-    const axisLabels = this.createAxisLabels(dtw);
+    const axisLabels = this.createAxisLabels(dtw, resolution);
     const coverageItems = this.createCoverageItems(items, dtw);
 
     return { axisLabels, coverageItems };
   }
 
-  createAxisLabels(timeWindow: DateRange): Array<HorizontalAxisLabelVM> {
-    const monthsCount = this.getMonthsCountInRange(timeWindow);
-    const monthsToIterate = this.arrayOfItems(monthsCount);
+  createAxisLabels(timeWindow: DateRange, resolution: string = 'month'): Array<HorizontalAxisLabelVM> {
+    const labels: Array<HorizontalAxisLabelVM> = [];
     const totalWidth = moment(timeWindow.to).diff(timeWindow.from);
+    let currentFromDate = moment(timeWindow.from);
 
-    return monthsToIterate.map(monthNumber => {
-      const currentFromDate = moment(timeWindow.from).add(monthNumber, 'month');
-      const text = currentFromDate.format('MM/YY');
+    while (currentFromDate.isBefore(timeWindow.to)) {
+      const dateFormat = this.createDateFormat(resolution);
+      const text = currentFromDate.format(dateFormat);
       const positionOffset = moment(currentFromDate).diff(timeWindow.from);
       const position = (positionOffset / totalWidth) * 100;
 
-      return { position, text };
-    });
+      labels.push({ position, text });
+
+      currentFromDate = moment(currentFromDate).add(1, <any>resolution);
+    }
+
+    return labels;
   }
 
   createCoverageItems(
@@ -117,6 +122,21 @@ export class CoverageService {
     const isToInside = range.to.getTime() >= timeWindow.from.getTime();
 
     return isFromInside && isToInside;
+  }
+
+  createDateFormat(resolution: string) {
+    switch (resolution) {
+      case 'year':
+        return 'YYYY';
+      case 'quarter':
+        return '\\QQ/YY';
+      case 'month':
+        return 'MM/YY';
+      case 'week':
+        return 'w/YY';
+      default:
+        return 'MM/YY';
+    }
   }
 
   arrayOfItems(n: number) {

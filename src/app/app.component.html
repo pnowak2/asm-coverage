@@ -1,6 +1,7 @@
 <asm-coverage-chart 
   [timeWindow]="timeWindow" 
   [coverageItems]="coverageItems"
+  [resolution]="resolution"
   (barClick)="onBarClick($event)"
   (barMouseover)="onBarMouseover($event)"
   (barMouseout)="onBarMouseout($event)">
@@ -8,3 +9,9 @@
 
 <button (click)="moveTimeWindowUp()">+3 months</button>
 <button (click)="moveTimeWindowDown()">-3 months</button>
+
+<button (click)="onResolutionClick('week')">Week</button>
+<button (click)="onResolutionClick('month')">Month</button>
+<button (click)="onResolutionClick('quarter')">Quarter</button>
+<button (click)="onResolutionClick('year')">Year</button>
+
