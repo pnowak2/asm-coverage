@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DateRange, CoverageItem, CoveragePeriodEvent } from './coverage-chart/model/coverage.model';
+import { DateRange, CoverageItem, CoverageEvent } from './coverage-chart/model/coverage.model';
 import * as moment from 'moment';
 
 @Component({
@@ -11,6 +11,7 @@ export class AppComponent {
   timeWindow: DateRange;
   coverageItems: Array<CoverageItem>;
   resolution: string;
+  markerDate = moment('18/5/2018', 'DD-MM-YYYY').toDate();
 
   constructor() {
     this.timeWindow = {
@@ -22,14 +23,15 @@ export class AppComponent {
       {
         label: 'OPSOMMER Gunnar (AF-00)',
         periods: [{
+          styleClass: 'progress-bar-striped progress-bar-striped--green',
           range: {
             from: moment('1/6/2017', 'DD-MM-YYYY').toDate(),
-            to: moment('1/12/2017', 'DD-MM-YYYY').toDate()
+            to: moment('30/11/2017', 'DD-MM-YYYY').toDate()
           }
         },
         {
-          label: 'IMPORTANT',
-          styleClass: 'bg-danger',
+          label: 'Delegation',
+          styleClass: 'ux-u-bg-color-danger',
           range: {
             from: moment('1/1/2018', 'DD-MM-YYYY').toDate(),
             to: moment('1/5/2018', 'DD-MM-YYYY').toDate()
@@ -37,7 +39,7 @@ export class AppComponent {
         },
         {
           label: 'OTHER',
-          styleClass: 'bg-success',
+          styleClass: 'ux-u-bg-color-success',
           range: {
             from: moment('1/6/2018', 'DD-MM-YYYY').toDate(),
             to: moment('1/7/2018', 'DD-MM-YYYY').toDate()
@@ -50,12 +52,12 @@ export class AppComponent {
           label: 'IN DELEGATION',
           range: {
             from: moment('1/6/2016', 'DD-MM-YYYY').toDate(),
-            to: moment('1/6/2017', 'DD-MM-YYYY').toDate()
+            to: moment('1/11/2017', 'DD-MM-YYYY').toDate()
           }
         },
         {
-          label: 'IMPORTANT',
-          styleClass: 'bg-info',
+          label: 'Conditional',
+          styleClass: 'ux-u-bg-color-info',
           range: {
             from: moment('1/3/2018', 'DD-MM-YYYY').toDate(),
             to: moment('1/5/2019', 'DD-MM-YYYY').toDate()
@@ -65,31 +67,75 @@ export class AppComponent {
       {
         label: 'OPSOMMER Angela (EF-01)',
         periods: [{
-          label: 'THE ONE',
+          label: 'Partial coverage',
+          styleClass: 'ux-u-bg-color-warning',
           range: {
-            from: moment('1/1/2016', 'DD-MM-YYYY').toDate(),
-            to: moment('1/6/2017', 'DD-MM-YYYY').toDate()
+            from: moment('16/7/2017', 'DD-MM-YYYY').toDate(),
+            to: moment('20/2/2018', 'DD-MM-YYYY').toDate()
           }
         },
         {
+          label: '(Greece)',
+          styleClass: 'progress-bar-striped ux-u-bg-color-danger',
           range: {
-            from: moment('1/9/2018', 'DD-MM-YYYY').toDate(),
-            to: moment('1/5/2019', 'DD-MM-YYYY').toDate()
+            from: moment('1/4/2018', 'DD-MM-YYYY').toDate(),
+            to: moment('1/8/2018', 'DD-MM-YYYY').toDate()
+          }
+        }]
+      },
+      {
+        label: 'OPSOMMER Emilie (EF-02)',
+        periods: [{
+          styleClass: 'ux-u-bg-color-success',
+          range: {
+            from: moment('1/10/2017', 'DD-MM-YYYY').toDate(),
+            to: moment('1/6/2018', 'DD-MM-YYYY').toDate()
+          }
+        }]
+      },
+      {
+        label: 'OPSOMMER Tom (EF-03)',
+        periods: [{
+          styleClass: 'progress-bar-striped progress-bar-striped--blue ux-u-bg-color-warning',
+          range: {
+            from: moment('1/6/2017', 'DD-MM-YYYY').toDate(),
+            to: moment('1/8/2017', 'DD-MM-YYYY').toDate()
+          }
+        },
+        {
+          styleClass: 'progress-bar-striped progress-bar-striped--red ux-u-bg-color-warning',
+          range: {
+            from: moment('1/9/2017', 'DD-MM-YYYY').toDate(),
+            to: moment('1/11/2017', 'DD-MM-YYYY').toDate()
+          }
+        },
+        {
+          styleClass: 'progress-bar-striped progress-bar-striped--green ux-u-bg-color-warning',
+          range: {
+            from: moment('1/12/2017', 'DD-MM-YYYY').toDate(),
+            to: moment('1/2/2018', 'DD-MM-YYYY').toDate()
+          }
+        },
+        {
+          styleClass: 'progress-bar-striped progress-bar-striped--orange',
+          range: {
+            from: moment('1/3/2018', 'DD-MM-YYYY').toDate(),
+            to: moment('1/5/2018', 'DD-MM-YYYY').toDate()
           }
         }]
       }
     ];
   }
 
-  onBarClick(evt: CoveragePeriodEvent) {
+  onBarClick(evt: CoverageEvent) {
     console.log('bar click', evt);
   }
 
-  onBarMouseover(evt: CoveragePeriodEvent) {
+  onBarMouseover(evt: CoverageEvent) {
     console.log('bar mouse over', evt);
   }
 
-  onBarMouseout(evt: CoveragePeriodEvent) {
+  onBarMouseout(evt: CoverageEvent) {
     console.log('bar mouse out', evt);
   }
 

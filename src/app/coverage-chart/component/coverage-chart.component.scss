@@ -77,6 +77,13 @@
         height: 100%;
         left: 50%;
         z-index: 1;
+
+        &--date-marker {
+          border-left-color: red;
+          border-left-style: solid;
+          border-left-width: 2px;
+          opacity: 1;
+        }
       }
     }
 

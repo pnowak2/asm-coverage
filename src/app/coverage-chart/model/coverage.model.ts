@@ -14,8 +14,9 @@ export interface DateRange {
   to?: Date;
 }
 
-export interface CoveragePeriodEvent {
+export interface CoverageEvent {
   domEvent: MouseEvent;
+  item: CoverageItem;
   period: CoveragePeriod;
 }
 
@@ -40,4 +41,5 @@ export interface CoveragePeriodVM {
 export interface CoverageVM {
   axisLabels: Array<HorizontalAxisLabelVM>;
   coverageItems: Array<CoverageItemVM>;
+  dateMarker: HorizontalAxisLabelVM;
 }

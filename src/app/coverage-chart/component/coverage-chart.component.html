@@ -1,7 +1,12 @@
 <div class="asm-coverage-chart">
 
   <div class="asm-coverage-chart__x-axis">
-    <div *ngFor="let label of vm.axisLabels" 
+    
+    <div *ngIf="vm.dateMarker" [style.left.%]="vm.dateMarker.position"
+         class="asm-coverage-chart__x-axis-item">
+        <div class="asm-coverage-chart__x-axis-item-line asm-coverage-chart__x-axis-item-line--date-marker"></div>
+    </div>
+    <div *ngFor="let label of vm.axisLabels"
         [style.left.%]="label.position"
         class="asm-coverage-chart__x-axis-item">
         <div class="asm-coverage-chart__x-axis-item-text">{{ label.text }}</div>
@@ -12,19 +17,19 @@
   <div *ngFor="let item of vm.coverageItems" class="asm-coverage-chart__item">
     <div class="asm-coverage-chart__item-text">{{ item.label }}</div>
     <div class="progress asm-coverage-chart__item-progress">
-      <div *ngFor="let period of item.periods" 
-           (click)="onBarClick($event, period.originalPeriod)" 
-           (mouseover)="onBarMouseover($event, period.originalPeriod)" 
-           (mouseout)="onBarMouseout($event, period.originalPeriod)" 
+      <div *ngFor="let period of item.periods"
+           (click)="onBarClick($event, item, period.originalPeriod)"
+           (mouseover)="onBarMouseover($event, item, period.originalPeriod)"
+           (mouseout)="onBarMouseout($event, item, period.originalPeriod)"
            [style.width.%]="period.width"
            [style.left.%]="period.offset"
            class="asm-coverage-chart__item-progress-bar progress-bar {{ period.styleClass }}">
-        <span *ngIf="period.label" 
+        <span *ngIf="period.label"
               class="asm-coverage-chart__item-progress-text text-truncate">
           {{ period.label }}
         </span>
       </div>
     </div>
   </div>
-  
+
 </div>
